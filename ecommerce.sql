@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 12-10-2020 a las 01:52:20
+-- Tiempo de generación: 12-10-2020 a las 02:12:35
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.2.20
 
@@ -34,6 +34,14 @@ CREATE TABLE `categoria` (
   `eliminado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id_categoria`, `nombre`, `eliminado`) VALUES
+(1, 'Verduras', 1),
+(3, 'Frutas', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -50,6 +58,14 @@ CREATE TABLE `producto` (
   `eliminado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id_producto`, `nombre`, `precio`, `descripcion`, `id_categoria`, `id_proveedor`, `eliminado`) VALUES
+(1, 'Banana', 40, 'Bananita', 3, 1, 1),
+(2, 'Cebolla', 70, 'Que cara esta la cebolla', 1, 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -63,6 +79,13 @@ CREATE TABLE `proveedor` (
   `eliminado` int(11) NOT NULL,
   `cuit` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`id_proveedor`, `nombre`, `direccion`, `eliminado`, `cuit`) VALUES
+(1, 'El bananero', 'Uruguay 245', 1, '30-9432567-7');
 
 -- --------------------------------------------------------
 
@@ -117,7 +140,9 @@ ALTER TABLE `categoria`
 -- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD PRIMARY KEY (`id_producto`);
+  ADD PRIMARY KEY (`id_producto`),
+  ADD KEY `fk_id_categoria` (`id_categoria`),
+  ADD KEY `fk_id_proveedor` (`id_proveedor`);
 
 --
 -- Indices de la tabla `proveedor`
@@ -146,19 +171,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -175,6 +200,13 @@ ALTER TABLE `usuario`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD CONSTRAINT `fk_id_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`),
+  ADD CONSTRAINT `fk_id_proveedor` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`);
 
 --
 -- Filtros para la tabla `usuario`
