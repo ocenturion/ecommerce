@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-2">
+        <div class="col-12 col-md-2 mb-3">
             <div class="accordion" id="accordionExample">
                 <div class="card">
                     <div class="card-header" id="headingOne">
@@ -24,17 +24,8 @@
             </div>
         </div>
         <div class="col-12 col-md-10">
-            <div class="row">
-                <div class="col-12 col-md-3">
-                    <div class="card mx-auto" style="width: 18rem;">
-                      <img src="https://1.bp.blogspot.com/-0V5xiGGwhBc/VK0My5TjBTI/AAAAAAAADxY/cQjkOOq9uqM/s1600/manzana-roja.png" class="card-img-top" alt="...">
-                      <div class="card-body">
-                            <h2>Nombre del producto</h2>
-                            <h5>$ Precio</h5>
-                        <p class="card-text">Breve descripcion.</p>
-                      </div>
-                    </div>
-                </div>
+            <div class="row" id="productos">
+              <!-- aca van los productos -->
             </div>
         </div>
     </div>

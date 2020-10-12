@@ -21,5 +21,31 @@
     
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script>
+      $.ajax({
+          type:"POST",
+          dateType:"json",
+          url:"cargarProductos.php",
+          success:function(respuesta){
+            let respuesta2=JSON.parse(respuesta);
+            let producto='';
+            respuesta2.forEach(elemento => {
+              producto+=`
+              <div class="col-12 col-md-3 mb-3 ml-md-3">
+                <div class="card mx-auto" style="width: 18rem;">
+                  <img src="https://1.bp.blogspot.com/-0V5xiGGwhBc/VK0My5TjBTI/AAAAAAAADxY/cQjkOOq9uqM/s1600/manzana-roja.png" class="card-img-top" alt="...">
+                  <div class="card-body">
+                        <h2>${elemento.nombre}</h2>
+                        <h5>$ ${elemento.precio}</h5>
+                    <p class="card-text">${elemento.descripcion}</p>
+                  </div>
+                </div>
+              </div>
+              `
+            });
+            document.getElementById('productos').innerHTML=producto;
+          }
+      })
+    </script>
 </body>
 </html>
