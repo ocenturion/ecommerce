@@ -41,15 +41,58 @@
         function mostrarTabla(abm){  
             if (abm==="abmProductos") {
                 document.getElementById('tituloDelAbm').innerHTML="ABM Productos";
+                document.getElementById('tableHead').innerHTML=`
+                                                                <th>Nombre</th>
+                                                                <th>Eliminado</th>
+                `;
             }else if (abm==="abmCategorías"){
                 document.getElementById('tituloDelAbm').innerHTML="ABM Categorías";
+                document.getElementById('tableHead').innerHTML=`
+                                                                <th>Nombre</th>
+                                                                <th>Eliminado</th>
+                `;
             }else if (abm==="abmProveedores"){
                 document.getElementById('tituloDelAbm').innerHTML="ABM Proveedores";
+                document.getElementById('tableHead').innerHTML=`
+                                                                <th>Nombre</th>
+                                                                <th>Eliminado</th>
+                `;
             }else if (abm==="Reportes"){
                 document.getElementById('tituloDelAbm').innerHTML="Reportes";
+                document.getElementById('tableHead').innerHTML=`
+                                                                <th>Nombre</th>
+                                                                <th>Eliminado</th>
+                `;
             }else{
                 document.getElementById('tituloDelAbm').innerHTML="Mis datos";
+                document.getElementById('tableHead').innerHTML=`
+                                                                <th>Nombre</th>
+                                                                <th>Eliminado</th>
+                `;
             }  
+            
+            let tipoDeConsulta = abm;
+
+            data = {"tipoDeConsulta": tipoDeConsulta};
+            $.ajax({
+                type:"POST",
+                dateType:"json",
+                url:"traerABM.php",
+                data:data,
+                success:function(respuesta){
+                    let respuesta2=JSON.parse(respuesta);
+                    let llenarTabla='';
+                    respuesta2.forEach(element => {
+                        llenarTabla+=`
+                        <tr>
+                          <td>${element.nombre}</td>
+                          <td>${element.eliminado}</td>
+                        </tr>
+                        `;
+                    });
+                    document.getElementById('tableBody').innerHTML=llenarTabla;
+                }
+            })
         }
     </script>
 </body>

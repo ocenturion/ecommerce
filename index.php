@@ -12,8 +12,8 @@
 
     <div class="jumbotron jumbotron-fluid" style="background-color: #FFDFC2">
       <div class="container">
-        <h1 class="display-4">Fluid jumbotron</h1>
-        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        <h1 class="display-4">Verduleria "Los Bolis"</h1>
+        <p class="lead">La banana que te gusta, al mejor precio!</p>
       </div>
     </div>
 
@@ -45,7 +45,28 @@
             });
             document.getElementById('productos').innerHTML=producto;
           }
-      })
+      });
+      
+      function ingresar(){
+        let nombre = document.getElementById('nombre').value;
+        let pass = document.getElementById("pass").value;
+
+        data = {"nombre": nombre, "pass": pass};
+        $.ajax({
+          type:"POST",
+          dataType: "json",
+          url: "login.php",
+          data: data,
+          success: function(e){
+            console.log(e); 
+            if (e==1) {
+              window.location="adminEcommerce.php";
+            } 
+          }
+        })
+      }
+      
     </script>
+    
 </body>
 </html>

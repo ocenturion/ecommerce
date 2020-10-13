@@ -38,8 +38,8 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Correo:</label>
-            <input type="email" class="form-control" id="correo">
+            <label for="recipient-name" class="col-form-label">Nombre:</label>
+            <input type="text" class="form-control" id="nombre">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Contraseña:</label>
@@ -49,7 +49,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Ingresar</button>
+        <button type="submit" class="btn btn-primary" onclick="ingresar()">Ingresar</button>
       </div>
     </div>
   </div>
