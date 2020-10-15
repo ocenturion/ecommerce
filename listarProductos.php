@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-2 mb-3">
-            <div class="accordion sticky-top" id="accordionExample">
+        <div class="col-12 col-md-2 mb-3 sticky-top">
+            <div class="sticky-top accordion" id="accordionExample">
                 <div class="card">
                     <div class="card-header" id="headingOne">
                       <h2 class="mb-0">
