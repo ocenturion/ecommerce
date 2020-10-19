@@ -78,5 +78,3 @@
     </div>
   </div>
 </div>
-
-<script src="adminEcommerce_agregar.js"></script>

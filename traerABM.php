@@ -8,7 +8,9 @@
                         a.precio,
                         a.descripcion,
                         b.nombre as 'categoria',
+                        a.id_categoria,
                         c.nombre as 'proveedor',
+                        a.id_proveedor,
                         a.eliminado
                         from producto a 
                         left join categoria b on b.id_categoria=a.id_categoria
@@ -34,7 +36,9 @@
                 "precio"=>$reg["precio"],
                 "descripcion"=>$reg["descripcion"],
                 "categoria"=>$reg["categoria"],
+                "id_categoria"=>$reg["id_categoria"],
                 "proveedor"=>$reg["proveedor"],
+                "id_proveedor"=>$reg["id_proveedor"],
             );
          }elseif ($tipoDeConsulta=='abmCategorías') {
             $jsondata[]=array(

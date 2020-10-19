@@ -2,14 +2,27 @@ function onclick_btnEditar(tipoABM, id, nombre, precio, descripcion, direccion, 
     let categorias='';
     let proveedores='';
     cargarCategoria.forEach(element => {
-        categorias+= `
-            <option value="${element.id}">${element.nombre}</option>
-        `;
+        if (idCategoria==element.id) {
+            categorias+= `
+                <option value="${element.id}" selected>${element.nombre}</option>
+            `;
+        }else{
+            categorias+= `
+                <option value="${element.id}" >${element.nombre}</option>
+            `;
+        }
     });
     cargarProveedor.forEach(element => {
-        proveedores+= `
-            <option value="${element.id}">${element.nombre}</option>
-        `;
+        if (idProveedor==element.id) {
+            proveedores+= `
+                <option value="${element.id}" selected>${element.nombre}</option>
+            `;
+        }else{
+            proveedores+= `
+                <option value="${element.id}">${element.nombre}</option>
+            `;
+        }
+        
     });
     console.log(categorias);
     document.getElementById('tituloModificar').innerHTML = "Editar " + tipoABM;
