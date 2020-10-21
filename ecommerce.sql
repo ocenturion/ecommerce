@@ -1,14 +1,13 @@
--- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- phpMyAdmin SQL Dump 
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 12-10-2020 a las 02:12:35
--- Versión del servidor: 10.3.16-MariaDB
--- Versión de PHP: 7.2.20
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 22-10-2020 a las 01:33:03
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `prueba`
+-- Base de datos: `ecommerce`
 --
 
 -- --------------------------------------------------------
@@ -39,8 +38,8 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id_categoria`, `nombre`, `eliminado`) VALUES
-(1, 'Verduras', 1),
-(3, 'Frutas', 1);
+(1, 'Verduras', 0),
+(3, 'Frutas', 0);
 
 -- --------------------------------------------------------
 
@@ -64,7 +63,10 @@ CREATE TABLE `producto` (
 
 INSERT INTO `producto` (`id_producto`, `nombre`, `precio`, `descripcion`, `id_categoria`, `id_proveedor`, `eliminado`) VALUES
 (1, 'Banana', 40, 'Bananita', 3, 1, 1),
-(2, 'Cebolla', 70, 'Que cara esta la cebolla', 1, 1, 0);
+(2, 'Cebolla', 70, 'Que cara esta la cebolla', 1, 1, 0),
+(3, 'kiwi', 30, 'sin descripcion', 1, 1, 0),
+(4, 'Naranja', 40, 'sin descripcion', 3, 1, 0),
+(5, 'Melon', 50, 'sin descripcion', 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -85,7 +87,8 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`id_proveedor`, `nombre`, `direccion`, `eliminado`, `cuit`) VALUES
-(1, 'El bananero', 'Uruguay 245', 1, '30-9432567-7');
+(1, 'El bananero', 'Uruguay 245', 0, '30-9432567-7'),
+(2, 'provPrueba', 'dirPrueba', 0, '3030303030');
 
 -- --------------------------------------------------------
 
@@ -177,13 +180,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`

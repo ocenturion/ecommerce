@@ -39,6 +39,7 @@
                         <h5>$ ${elemento.precio}</h5>
                     <p class="card-text">${elemento.descripcion}</p>
                   </div>
+                  <button class="cart"></button>
                 </div>
               </div>
               `

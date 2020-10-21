@@ -51,9 +51,8 @@
       <div class="modal-body" id="bodyModificar">
         ...
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar Cambios</button>
+      <div class="modal-footer" id="btnEditarCancelar">
+        
       </div>
     </div>
   </div>
