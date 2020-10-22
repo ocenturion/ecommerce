@@ -24,7 +24,7 @@ function onclick_btnEditar(tipoABM, id, nombre, precio, descripcion, direccion, 
         }
         
     });
-    console.log(categorias);
+    
     document.getElementById('tituloModificar').innerHTML = "Editar " + tipoABM;
     if (tipoABM == "Producto") {
         document.getElementById('btnEditarCancelar').innerHTML =`
@@ -51,7 +51,7 @@ function onclick_btnEditar(tipoABM, id, nombre, precio, descripcion, direccion, 
                             <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
                         </div>
                         <input onkeyup="llenarVistaPrevia('vp_Nombre','editarNombre')" id="editarNombre" value="${nombre}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        <input id="tipoABMProducto" value="${tipoABM}" type="hidden">
+                        <input id="idProducto" value="${id}" type="hidden">
                         </div>
                         <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
@@ -105,8 +105,8 @@ function onclick_btnEditar(tipoABM, id, nombre, precio, descripcion, direccion, 
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
                         </div>
-                        <input onkeyup="llenarVistaPrevia('vp_Nombre','editarNombre')" id="editarNombre" value="${nombre}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        <input id="tipoABMCategoria" value="${tipoABM}" type="hidden">
+                        <input id="editarNombreCategoria" value="${nombre}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        <input id="idCategoria" value="${id}" type="hidden">
                         </div>
                     </div>
                     <div class="col-2"></div>
@@ -127,19 +127,20 @@ function onclick_btnEditar(tipoABM, id, nombre, precio, descripcion, direccion, 
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
                             </div>
-                            <input onkeyup="llenarVistaPrevia('vp_Nombre','editarNombre')" id="editarNombre" value="${nombre}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <input id="editarNombreProveedor" value="${nombre}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <input id="idProveedor" value="${id}" type="hidden">
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">Dirección</span>
                             </div>
-                            <input onkeyup="llenarVistaPrevia('vp_Nombre','editarNombre')" id="editarNombre" value="${direccion}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <input id="editarDireccion" value="${direccion}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">Cuit</span>
                             </div>
-                            <input onkeyup="llenarVistaPrevia('vp_Nombre','editarNombre')" id="editarNombre" value="${cuit}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <input id="editarCuit" value="${cuit}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                     </div>
                     <div class="col-2"></div>
@@ -152,30 +153,43 @@ function onclick_btnEditar(tipoABM, id, nombre, precio, descripcion, direccion, 
 /* Función que graba los cambios en la DB -> Se la llama desde el botón "Guardar Cambios" dentro del modal ABM seleccionado */
 /* Se le pasa el parámetro tipoABM para saber qué modificar en la DB */
 function editarCambios(tipoABM){
-    let data = {"tipoABM": tipoABM, "id":id};
-    $.ajax({
-        type:"POST",
-        dataType:"json",
-        url:"adminEcommerce.editar.php",
-        data:data,
-        success:
-    })
-
+         
     tipoABM=tipoABM.toLowerCase();
-    let nombreProducto=document.getElementById('editarNombre').value;
+    
     if (tipoABM=="producto") {
+        let id=document.getElementById('idProducto').value;
+        let nombreProducto=document.getElementById('editarNombre').value;
         let precioProducto=document.getElementById('editarPrecio').value;
         let descripcionProducto=document.getElementById('editarDescripcion').value;
         let idProveedor=document.getElementById('editarProveedor').value;
         let idCategoria=document.getElementById('editarCategoria').value;
-        data
+        data = {"tipoABM": tipoABM, "id":id,"nombre":nombreProducto, "precio":precioProducto,"descripcion":descripcionProducto,"idproveedor":idProveedor,"idcategoria":idCategoria};
+        console.log(data);
     }else if (tipoABM=="categoria") {
-        let idCategoria=document.getElementById('editarCategoria').value;
+        let nombreCategoria=document.getElementById('editarNombreCategoria').value;
+        let idCategoria=document.getElementById('idCategoria').value;
+        data = {"tipoABM": tipoABM, "id":idCategoria,"nombre":nombreCategoria};
+        console.log(data);
     }else if (tipoABM=="proveedor") {
-        let idProveedor=document.getElementById('editarProveedor').value;
-        let direccionProveedor=document.getElementById('editarProveedor').value;
-        let cuitProveedor=document.getElementById('editarProveedor').value;
+        let idProveedor=document.getElementById('idProveedor').value;
+        let nombreProveedor=document.getElementById('editarNombreProveedor').value;
+        let direccionProveedor=document.getElementById('editarDireccion').value;
+        let cuitProveedor=document.getElementById('editarCuit').value;
+        data = {"tipoABM": tipoABM, "id":idProveedor,"nombre":nombreProveedor,"direccion":direccionProveedor,"cuit":cuitProveedor};
+        console.log(data);
     }
+
+    $.ajax({
+        type:"POST",
+        dataType:"json",
+        url:"adminEcommerce_editar.php",
+        data:data,
+        success: function(respuesta){
+            console.log(respuesta);
+        }
+    })
+
+    
     
     
 }

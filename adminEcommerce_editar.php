@@ -2,32 +2,31 @@
 
     include("conexion.php");
 
-    $id=$_POST['id'];
     $tipoDeABM=$_POST['tipoABM'];
+    $id=$_POST['id'];
+    $nombre=$_POST['nombre'];
 
     if ($tipoDeABM=="producto") {
-        echo "entre a producto";
-        echo "update $tipoDeABM set nombre = nombre, precio = precio, descripcion = descripcion, id_categoria = id_categoria
-        id_proveedor = id_proveedor where id_producto=$id";
-
-        $queryEliminarProd="update $tipoDeABM set eliminado=1 where id_producto=$id";
-        $ejecutarEliminarProd=mysqli_query($conexion,$queryEliminarProd);
-    }else if ($tipoDeABM=="categoria") {
-        # code...
-        $idRelacion="id_".$tipoDeABM;
-
-        $query= "update $tipoDeABM set nombre = nombre where id_categoria=$id";
+        $precio=$_POST['precio'];
+        $descripcion=$_POST['descripcion'];
+        $idcategoria=$_POST['idcategoria'];
+        $idproveedor=$_POST['idproveedor'];
+        $query="update $tipoDeABM set nombre = $nombre, precio = $precio, descripcion = $descripcion, id_categoria = $idcategoria
+        id_proveedor = $idproveedor where id_producto=$id";
+        echo $precio;
         
-        $ejecutar=mysqli_query($conexion,$query);
-        if(mysqli_num_rows($ejecutar)==0)
-        {
-            $query2="update $tipoDeABM set eliminado=1 where $idRelacion=$id";
-            
-            $ejecutar2=mysqli_query($conexion,$query2);
-        }
+    }else if ($tipoDeABM=="categoria") {
+        $idcategoria=$_POST['idcategoria'];
+
+        $query= "update $tipoDeABM set nombre = $nombre where id_categoria=$id";
+        
     }else {
-        $query = "update $tipoDeABM set nombre = nombre, direccion = direccion, cuit = cuit where id_proveedor=$id";
+        $idproveedor=$_POST['idproveedor'];
+        $direccion=$_POST['direccion'];
+        $cuit=$_POST['cuit'];
+        $query = "update $tipoDeABM set nombre = $nombre, direccion = $direccion, cuit = $cuit where id_proveedor=$id";
     }
-    echo "salgo de eliminar.php";
+    $ejecutarEditarProd=mysqli_query($conexion,$query);
+    echo "salgo de editar.php";
     
 ?>
