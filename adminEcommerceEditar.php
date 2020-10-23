@@ -1,11 +1,11 @@
 <?php
-
-    include("conexion.php");
-
+    
+/*    include("conexion.php");
+ 
     $tipoDeABM=$_POST['tipoABM'];
     $id=$_POST['id'];
     $nombre=$_POST['nombre'];
-
+    
     if ($tipoDeABM=="producto") {
         $precio=$_POST['precio'];
         $descripcion=$_POST['descripcion'];
@@ -17,16 +17,14 @@
         
     }else if ($tipoDeABM=="categoria") {
         $idcategoria=$_POST['idcategoria'];
-
         $query= "update $tipoDeABM set nombre = $nombre where id_categoria=$id";
-        
     }else {
         $idproveedor=$_POST['idproveedor'];
         $direccion=$_POST['direccion'];
         $cuit=$_POST['cuit'];
         $query = "update $tipoDeABM set nombre = $nombre, direccion = $direccion, cuit = $cuit where id_proveedor=$id";
     }
-    $ejecutarEditarProd=mysqli_query($conexion,$query);
+    $ejecutarEditarProd=mysqli_query($conexion,$query); */
     echo "salgo de editar.php";
     
 ?>

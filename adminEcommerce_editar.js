@@ -164,32 +164,28 @@ function editarCambios(tipoABM){
         let idProveedor=document.getElementById('editarProveedor').value;
         let idCategoria=document.getElementById('editarCategoria').value;
         data = {"tipoABM": tipoABM, "id":id,"nombre":nombreProducto, "precio":precioProducto,"descripcion":descripcionProducto,"idproveedor":idProveedor,"idcategoria":idCategoria};
-        console.log(data);
+        
     }else if (tipoABM=="categoria") {
         let nombreCategoria=document.getElementById('editarNombreCategoria').value;
         let idCategoria=document.getElementById('idCategoria').value;
         data = {"tipoABM": tipoABM, "id":idCategoria,"nombre":nombreCategoria};
-        console.log(data);
+        
     }else if (tipoABM=="proveedor") {
         let idProveedor=document.getElementById('idProveedor').value;
         let nombreProveedor=document.getElementById('editarNombreProveedor').value;
         let direccionProveedor=document.getElementById('editarDireccion').value;
         let cuitProveedor=document.getElementById('editarCuit').value;
         data = {"tipoABM": tipoABM, "id":idProveedor,"nombre":nombreProveedor,"direccion":direccionProveedor,"cuit":cuitProveedor};
-        console.log(data);
+        
     }
-
+    console.log(data);
     $.ajax({
         type:"POST",
         dataType:"json",
-        url:"adminEcommerce_editar.php",
+        url:"adminEcommerceEditar.php",
         data:data,
-        success: function(respuesta){
+        success:function(respuesta){
             console.log(respuesta);
         }
-    })
-
-    
-    
-    
+    })  
 }
