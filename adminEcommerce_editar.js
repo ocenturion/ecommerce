@@ -181,7 +181,7 @@ function editarCambios(tipoABM){
     console.log(data);
     $.ajax({
         type:"POST",
-        url:"adminEcommerceEditar.php",
+        url:"adminEcommerce_editar.php",
         data:data,
         success:function(respuesta){
             if (tipoABM=="producto") {

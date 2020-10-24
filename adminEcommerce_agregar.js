@@ -104,3 +104,45 @@ function onclick_btnAgregar(tipoABM){
         `;
     }
 }
+function agregarRegistro(tipoABM){
+         
+    tipoABM=tipoABM.toLowerCase();
+    
+    if (tipoABM=="producto") {
+        let nombreProducto=document.getElementById('editarNombre').value;
+        let precioProducto=document.getElementById('editarPrecio').value;
+        let descripcionProducto=document.getElementById('editarDescripcion').value;
+        let idProveedor=document.getElementById('editarProveedor').value;
+        let idCategoria=document.getElementById('editarCategoria').value;
+        data = {"tipoABM": tipoABM, "nombre":nombreProducto, "precio":precioProducto,"descripcion":descripcionProducto,"idproveedor":idProveedor,"idcategoria":idCategoria};
+        
+    }else if (tipoABM=="categoria") {
+        let nombreCategoria=document.getElementById('editarNombreCategoria').value;
+        data = {"tipoABM": tipoABM, "nombre":nombreCategoria};
+        
+    }else if (tipoABM=="proveedor") {
+        let nombreProveedor=document.getElementById('editarNombreProveedor').value;
+        let direccionProveedor=document.getElementById('editarDireccion').value;
+        let cuitProveedor=document.getElementById('editarCuit').value;
+        data = {"tipoABM": tipoABM, "nombre":nombreProveedor,"direccion":direccionProveedor,"cuit":cuitProveedor};
+        
+    }
+    console.log(data,tipoABM);
+    $.ajax({
+        type:"POST",
+        url:"adminEcommerce_agregar.php",
+        data:data,
+        success:function(respuesta){
+            if (tipoABM=="producto") {
+                mostrarTabla("abmProductos");
+                console.log(respuesta);    
+            }else if(tipoABM=="categoria"){
+                mostrarTabla("abmCategorías");
+                console.log(respuesta); 
+            }else if(tipoABM=="proveedor"){
+                mostrarTabla("abmProveedores");
+                console.log(respuesta); 
+            }
+        }
+    })  
+}
