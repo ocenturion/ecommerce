@@ -28,6 +28,8 @@ function mostrarTabla(abm){
 
     document.getElementById('btnAgregar').style.visibility="visible";
     if (abm==="abmProductos") {
+        document.getElementById('moduloDerecho').style.visibility="visible";
+        document.getElementById('moduloDatos').style.visibility="hidden";
         document.getElementById('tituloDelAbm').innerHTML="ABM Productos";
         document.getElementById('tituloAgregar').innerHTML="Agregar Productos";
         document.getElementById('btnAgregar').innerHTML=`
@@ -80,12 +82,8 @@ function mostrarTabla(abm){
                                                         <th>Nombre</th>
                                                         <th>Eliminado</th>
         `;
-    }else{
+    }else {
         document.getElementById('tituloDelAbm').innerHTML="Mis datos";
-        document.getElementById('tableHead').innerHTML=`
-                                                        <th>Nombre</th>
-                                                        <th>Eliminado</th>
-        `;
     }  
     
     let tipoDeConsulta = abm;
@@ -181,4 +179,8 @@ function llenarVistaPrevia(idALlenar,idDelContenido){
     if (idALlenar=="vp_Precio") {
         document.getElementById(idALlenar).innerHTML="$ "+document.getElementById(idDelContenido).value;
     }
+}
+
+function cargarMisDatos(){
+    document.getElementById('tituloMisDatos').innerHTML="Mis datos"; 
 }

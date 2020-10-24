@@ -27,12 +27,17 @@
                     <a class="list-group-item list-group-item-action" data-toggle="list" onclick="mostrarTabla('abmCategorías')">ABM Categorías</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" onclick="mostrarTabla('abmProveedores')">ABM Proveedores</a>
                     <a class="list-group-item list-group-item-action" data-toggle="list" onclick="mostrarTabla('Reportes')">Reportes</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" onclick="mostrarTabla('Misdatos')">Mis datos</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" onclick="mostrarTabla('misDatos')">Mis datos</a>
                 </div>
             </div>
             <div class="col-md-9">
-                <?php include("abmProductos.php");?>
-            </div>
+                <div id="moduloDerecho">
+                    <?php include("abmProductos.php");?>
+                </div>
+                <div id="moduloDatos" style="visibility:hidden">
+                    <?php include("misDatos.php");?>
+                </div>
+            </div>                        
         </div>
     </div>
     

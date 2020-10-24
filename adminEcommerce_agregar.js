@@ -1,6 +1,25 @@
 function onclick_btnAgregar(tipoABM){
+
+    let categorias='';
+    let proveedores='';
+    cargarCategoria.forEach(element => {
+        categorias+= `
+            <option value="${element.id}" >${element.nombre}</option>
+        `;        
+    });
+    cargarProveedor.forEach(element => {
+        proveedores+= `
+                <option value="${element.id}" >${element.nombre}</option>
+        `;
+    });
+
     document.getElementById('tituloAgregar').innerHTML="Agregar " +tipoABM;
     if (tipoABM=="producto") {
+        document.getElementById('btnAgregarCancelar').innerHTML=`
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button onclick="agregar('${tipoABM}')" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+        `;
+
         document.getElementById('bodyAgregar').innerHTML=` 
             <div class="container-fluid">
                 <div class="row">
@@ -20,31 +39,35 @@ function onclick_btnAgregar(tipoABM){
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
                         </div>
-                        <input onkeyup="llenarVistaPrevia('vp_Nombre','agregarNombre')" id="agregarNombre" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        <input onkeyup="llenarVistaPrevia('vp_Nombre','nombreProducto')" id="nombreProducto"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                         <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Precio</span>
                         </div>
-                        <input onkeyup="llenarVistaPrevia('vp_Precio','agregarPrecio')" id="agregarPrecio" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        <input onkeyup="llenarVistaPrevia('vp_Precio','agregarPrecio')" id="agregarPrecio"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                         <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Descripción</span>
                         </div>
-                        <input onkeyup="llenarVistaPrevia('vp_Descripcion','agregarDescripcion')" id="agregarDescripcion" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        <input onkeyup="llenarVistaPrevia('vp_Descripcion','agregarDescripcion')" id="agregarDescripcion"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
-                        <div class="input-group input-group-sm mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Categoría</span>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Categoría</label>
+                          </div>
+                          <select class="custom-select" id="agregarCategoria">
+                            ${categorias}
+                          </select>
                         </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        </div>
-                        <div class="input-group input-group-sm mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Proveedor</span>
-                        </div>
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Proveedor</label>
+                          </div>
+                          <select class="custom-select" id="agregarProveedor">
+                            ${proveedores}
+                          </select>
                         </div>
                         <div class="input-group">
                             <div class="custom-file">
@@ -57,6 +80,11 @@ function onclick_btnAgregar(tipoABM){
             </div>
         `;
     }else if(tipoABM=="categoria"){
+        document.getElementById('btnAgregarCancelar').innerHTML=`
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button onclick="agregar('${tipoABM}')" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+        `;
+
         document.getElementById('bodyAgregar').innerHTML=` 
             <div class="container-fluid">
                 <div class="row">
@@ -66,14 +94,19 @@ function onclick_btnAgregar(tipoABM){
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
                         </div>
-                        <input onkeyup="llenarVistaPrevia('vp_Nombre','agregarNombre')" id="agregarNombre" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        <input id="agregarNombreCategoria"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                     </div>
                     <div class="col-2"></div>
                 </div>
             </div>
         `;
-    }else if(tipoABM=="Proveedor"){
+    }else if(tipoABM=="proveedor"){
+        document.getElementById('btnAgregarCancelar').innerHTML=`
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button onclick="agregar('${tipoABM}')" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+        `;
+
         document.getElementById('bodyAgregar').innerHTML=` 
             <div class="container-fluid">
                 <div class="row">
@@ -83,19 +116,19 @@ function onclick_btnAgregar(tipoABM){
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">Nombre</span>
                             </div>
-                            <input onkeyup="llenarVistaPrevia('vp_Nombre','agregarNombre')" id="agregarNombre" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <input id="agregarNombreProv"   type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">Dirección</span>
                             </div>
-                            <input onkeyup="llenarVistaPrevia('vp_Nombre','agregarNombre')" id="agregarNombre" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <input id="agregarDireccion"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">Cuit</span>
                             </div>
-                            <input onkeyup="llenarVistaPrevia('vp_Nombre','agregarNombre')" id="agregarNombre" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <input id="agregarCuit" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                     </div>
                     <div class="col-2"></div>
@@ -103,4 +136,44 @@ function onclick_btnAgregar(tipoABM){
             </div>
         `;
     }
+}
+
+function agregar(tipoABM){
+
+    tipoABM = tipoABM.toLowerCase();
+
+    if(tipoABM == "producto"){
+        let nombreProd = document.getElementById('nombreProducto').value;
+        let precioProd = document.getElementById('agregarPrecio').value;
+        let descripcionProd = document.getElementById('agregarDescripcion').value;
+        let idCategoria = document.getElementById('agregarCategoria').value;
+        let idProveedor = document.getElementById('agregarProveedor').value;
+        data = {"tipoABM":tipoABM, "nombre":nombreProd, "precio":precioProd, "descripcion":descripcionProd, "idCategoria":idCategoria, "idProveedor":idProveedor};
+
+    }else if(tipoABM == "categoria"){
+        let nombreCategoria = document.getElementById('agregarNombreCategoria').value;
+        data = {"tipoABM":tipoABM, "nombre":nombreCategoria};
+
+    }else if(tipoABM == "proveedor"){
+        let nombreProveedor = document.getElementById('agregarNombreProv').value;
+        let direccionProveedor = document.getElementById('agregarDireccion').value;
+        let cuitProveedor = document.getElementById('agregarCuit').value;
+        data = {"tipoABM":tipoABM, "nombre":nombreProveedor, "direccion":direccionProveedor, "cuit":cuitProveedor};
+    }
+
+    $.ajax({
+        type:"POST",
+        url:"adminEcommerceAgregar.php",
+        data:data,
+        success:function(respuesta){
+            if (tipoABM=="producto") {
+                mostrarTabla("abmProductos");    
+            }else if(tipoABM=="categoria"){
+                mostrarTabla("abmCategorías");
+            }else if(tipoABM=="proveedor"){
+                mostrarTabla("abmProveedores");
+            }
+        }
+    }) 
+
 }

@@ -15,8 +15,6 @@
   </tbody>
 </table>
 
-
-
 <!-- Modal AGREGAR -->
 <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -30,9 +28,8 @@
       <div class="modal-body" id="bodyAgregar">
         ...
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Agregar</button>
+      <div class="modal-footer" id="btnAgregarCancelar">
+        
       </div>
     </div>
   </div>
