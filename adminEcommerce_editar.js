@@ -29,7 +29,7 @@ function onclick_btnEditar(tipoABM, id, nombre, precio, descripcion, direccion, 
     if (tipoABM == "Producto") {
         document.getElementById('btnEditarCancelar').innerHTML =`
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="editarCambios('${tipoABM}')">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary" onclick="editarCambios('${tipoABM}')" data-dismiss="modal">Guardar Cambios</button>
         `;
         document.getElementById('bodyModificar').innerHTML = ` 
             <div class="container-fluid">
@@ -94,7 +94,7 @@ function onclick_btnEditar(tipoABM, id, nombre, precio, descripcion, direccion, 
     } else if (tipoABM == "Categoria") {
         document.getElementById('btnEditarCancelar').innerHTML =`
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="editarCambios('${tipoABM}')">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary" onclick="editarCambios('${tipoABM}')" data-dismiss="modal">Guardar Cambios</button>
         `;
         document.getElementById('bodyModificar').innerHTML = ` 
             <div class="container-fluid">
@@ -116,7 +116,7 @@ function onclick_btnEditar(tipoABM, id, nombre, precio, descripcion, direccion, 
     } else if (tipoABM == "Proveedor") {
         document.getElementById('btnEditarCancelar').innerHTML =`
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="editarCambios('${tipoABM}')">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary" onclick="editarCambios('${tipoABM}')" data-dismiss="modal">Guardar Cambios</button>
         `;
         document.getElementById('bodyModificar').innerHTML = ` 
             <div class="container-fluid">
@@ -181,11 +181,19 @@ function editarCambios(tipoABM){
     console.log(data);
     $.ajax({
         type:"POST",
-        dataType:"json",
         url:"adminEcommerceEditar.php",
         data:data,
         success:function(respuesta){
-            console.log(respuesta);
+            if (tipoABM=="producto") {
+                mostrarTabla("abmProductos");
+                console.log(respuesta);    
+            }else if(tipoABM=="categoria"){
+                mostrarTabla("abmCategorías");
+                console.log(respuesta); 
+            }else if(tipoABM=="proveedor"){
+                mostrarTabla("abmProveedores");
+                console.log(respuesta); 
+            }
         }
     })  
 }
