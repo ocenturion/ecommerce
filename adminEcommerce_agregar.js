@@ -17,7 +17,7 @@ function onclick_btnAgregar(tipoABM){
     if (tipoABM=="producto") {
         document.getElementById('btnAgregarCancelar').innerHTML=`
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button onclick="agregar('${tipoABM}')" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+            <button onclick="agregarRegistro('${tipoABM}')" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
         `;
 
         document.getElementById('bodyAgregar').innerHTML=` 
@@ -82,7 +82,7 @@ function onclick_btnAgregar(tipoABM){
     }else if(tipoABM=="categoria"){
         document.getElementById('btnAgregarCancelar').innerHTML=`
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button onclick="agregar('${tipoABM}')" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+            <button onclick="agregarRegistro('${tipoABM}')" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
         `;
 
         document.getElementById('bodyAgregar').innerHTML=` 
@@ -104,7 +104,7 @@ function onclick_btnAgregar(tipoABM){
     }else if(tipoABM=="proveedor"){
         document.getElementById('btnAgregarCancelar').innerHTML=`
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button onclick="agregar('${tipoABM}')" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+            <button onclick="agregarRegistro('${tipoABM}')" type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
         `;
 
         document.getElementById('bodyAgregar').innerHTML=` 
@@ -137,43 +137,45 @@ function onclick_btnAgregar(tipoABM){
         `;
     }
 }
-
-function agregar(tipoABM){
-
-    tipoABM = tipoABM.toLowerCase();
-
-    if(tipoABM == "producto"){
-        let nombreProd = document.getElementById('nombreProducto').value;
-        let precioProd = document.getElementById('agregarPrecio').value;
-        let descripcionProd = document.getElementById('agregarDescripcion').value;
-        let idCategoria = document.getElementById('agregarCategoria').value;
-        let idProveedor = document.getElementById('agregarProveedor').value;
-        data = {"tipoABM":tipoABM, "nombre":nombreProd, "precio":precioProd, "descripcion":descripcionProd, "idCategoria":idCategoria, "idProveedor":idProveedor};
-
-    }else if(tipoABM == "categoria"){
-        let nombreCategoria = document.getElementById('agregarNombreCategoria').value;
-        data = {"tipoABM":tipoABM, "nombre":nombreCategoria};
-
-    }else if(tipoABM == "proveedor"){
-        let nombreProveedor = document.getElementById('agregarNombreProv').value;
-        let direccionProveedor = document.getElementById('agregarDireccion').value;
-        let cuitProveedor = document.getElementById('agregarCuit').value;
-        data = {"tipoABM":tipoABM, "nombre":nombreProveedor, "direccion":direccionProveedor, "cuit":cuitProveedor};
+function agregarRegistro(tipoABM){
+         
+    tipoABM=tipoABM.toLowerCase();
+    
+    if (tipoABM=="producto") {
+        let nombreProducto=document.getElementById('nombreProducto').value;
+        let precioProducto=document.getElementById('agregarPrecio').value;
+        let descripcionProducto=document.getElementById('agregarDescripcion').value;
+        let idProveedor=document.getElementById('agregarProveedor').value;
+        let idCategoria=document.getElementById('agregarCategoria').value;
+        data = {"tipoABM": tipoABM, "nombre":nombreProducto, "precio":precioProducto,"descripcion":descripcionProducto,"idproveedor":idProveedor,"idcategoria":idCategoria};
+        
+    }else if (tipoABM=="categoria") {
+        let nombreCategoria=document.getElementById('agregarNombreCategoria').value;
+        data = {"tipoABM": tipoABM, "nombre":nombreCategoria};
+        
+    }else if (tipoABM=="proveedor") {
+        let nombreProveedor=document.getElementById('agregarNombreProv').value;
+        let direccionProveedor=document.getElementById('agregarDireccion').value;
+        let cuitProveedor=document.getElementById('agregarCuit').value;
+        data = {"tipoABM": tipoABM, "nombre":nombreProveedor,"direccion":direccionProveedor,"cuit":cuitProveedor};
+        
     }
-
+    console.log(data,tipoABM);
     $.ajax({
         type:"POST",
-        url:"adminEcommerceAgregar.php",
+        url:"adminEcommerce_agregar.php",
         data:data,
         success:function(respuesta){
             if (tipoABM=="producto") {
-                mostrarTabla("abmProductos");    
+                mostrarTabla("abmProductos");
+                console.log(respuesta);    
             }else if(tipoABM=="categoria"){
                 mostrarTabla("abmCategorías");
+                console.log(respuesta); 
             }else if(tipoABM=="proveedor"){
                 mostrarTabla("abmProveedores");
+                console.log(respuesta); 
             }
         }
-    }) 
-
+    })  
 }
