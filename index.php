@@ -33,7 +33,6 @@
 			let producto='';
 			let valor="";
 			let clase = '';
-			let desabilitarBtn="";
             respuesta2.forEach(elemento => {
 				if (JSON.parse(localStorage.getItem("carro"))) {
         		  for (let index = 0;index < JSON.parse(localStorage.getItem("carro")).length;index++) {
@@ -41,14 +40,11 @@
         		    if (elemento.id === JSON.parse(localStorage.getItem("carro"))[index].id) {
 						clase = 'class="btn btn-warning btn-block text-left"';
 						valor="Producto ya agregado";
-						desabilitarBtn="disabled";
 						break;
         		    }else{
 						clase = 'class="btn btn-link btn-block text-left"'; 
 						valor="Agregar al carrito";
-						desabilitarBtn="";
 					}
-					console.log(JSON.parse(localStorage.getItem("carro"))[index].id," ",elemento.id, valor);
         		  }
         		}else{
 					clase = 'class="btn btn-link btn-block text-left"'; 
@@ -56,7 +52,7 @@
 				}
               let esunjson=JSON.stringify(elemento);
               producto+=`
-              <div class="col-12 col-md-3 mb-3 ml-md-3">
+              <div class="col-12 col-md-3 mb-3 ml-md-5 mr-md-2">
                 <div class="card mx-auto" style="width: 18rem;">
                   <img src="https://1.bp.blogspot.com/-0V5xiGGwhBc/VK0My5TjBTI/AAAAAAAADxY/cQjkOOq9uqM/s1600/manzana-roja.png" class="card-img-top" alt="...">
                   <div class="card-body">
@@ -64,11 +60,11 @@
                         <h5>$ ${elemento.precio}</h5>
                     <p class="card-text">${elemento.descripcion}</p>
                   </div>
-                  <button id="carrito" ${clase} onclick='agregarAlCarrito(${esunjson})' ${desabilitarBtn}>
-                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-  <path fill-rule="evenodd" d="M8.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 .5-.5z"/>
-</svg>
+                  <button id="btncarrito${elemento.id}" ${clase} onclick='agregarAlCarrito(${esunjson})'>
+                  	<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+					  <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+					  <path fill-rule="evenodd" d="M8.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 .5-.5z"/>
+					</svg>
                   ${valor}</button>
                 </div>
               </div>
@@ -99,16 +95,37 @@
         })
       }
       function agregarAlCarrito(elemento){
-        console.log(elemento);
-
+        
         let carroArray = [];
         if (JSON.parse(localStorage.getItem("carro"))) {
-          carroArray = JSON.parse(localStorage.getItem("carro"));
+			carroArray = JSON.parse(localStorage.getItem("carro"));
+			console.log(JSON.parse(localStorage.getItem("carro")).length);
+			for (let index = 0;index < JSON.parse(localStorage.getItem("carro")).length;index++) {	  
+				if (elemento.id === JSON.parse(localStorage.getItem("carro"))[index].id) {
+          if (index < JSON.parse(localStorage.getItem("carro")).length) {
+            console.log("elimino el producto del carro");
+					  carroArray.splice(index, 1);
+					  localStorage.setItem("carro", JSON.stringify(carroArray));
+					  if(JSON.parse(localStorage.getItem("carro")).length==0){
+						localStorage.clear();
+						console.log("elimino el carro");
+					  }
+					break;
+          }
+					
+				}else{
+					carroArray.push(elemento);
+					localStorage.setItem("carro", JSON.stringify(carroArray));
+					console.log("1-agrego el producto del carro");
+					/* break; */
+				}
+			}
         } else {
-          carroArray = [];
+		  	carroArray = [];
+		  	carroArray.push(elemento);
+			localStorage.setItem("carro", JSON.stringify(carroArray));
+			console.log("2-agrego el producto del carro");
         }
-        carroArray.push(elemento);
-		localStorage.setItem("carro", JSON.stringify(carroArray));
 		listarProductos();
       }
     </script>
