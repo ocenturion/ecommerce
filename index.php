@@ -22,8 +22,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script>
-    //Variable global para utilizar el carro, se declara acá para que el carro pueda vivir durante toda las operaciones de agregar/eliminar que se realicen sobre el
-    let carroArray = [];
+    //Variable global para utilizar el carro, se declara acá para 
+    //que el carro pueda vivir durante toda las operaciones de agregar/eliminar que se realicen sobre el
 
     
 		listarProductos();
@@ -79,7 +79,6 @@
           }
 	  });
 	}
-      
       function ingresar(){
         let nombre = document.getElementById('nombre').value;
         let pass = document.getElementById("pass").value;
@@ -98,36 +97,66 @@
           }
         })
       }
-      function agregarAlCarrito(elemento){
-        if (JSON.parse(localStorage.getItem("carro"))) {
-			carroArray = JSON.parse(localStorage.getItem("carro"));
-			console.log(JSON.parse(localStorage.getItem("carro")).length);
-			for (let index = 0;index < JSON.parse(localStorage.getItem("carro")).length;index++) {	  
-				if (elemento.id === JSON.parse(localStorage.getItem("carro"))[index].id) {
-          
-            console.log("elimino el producto del carro");
-					  carroArray.splice(index, 1);
-					  localStorage.setItem("carro", JSON.stringify(carroArray));
-					  if(JSON.parse(localStorage.getItem("carro")).length==0){
-						localStorage.clear();
-						console.log("elimino el carro");
-					
-					break;
-          }
-					
-				}else{
-					carroArray.push(elemento);
-					localStorage.setItem("carro", JSON.stringify(carroArray));
-					console.log("1-agrego el producto del carro");
-					/* break; */
-				}
-			}
-        } else {
-		  	carroArray = [];
-		  	carroArray.push(elemento);
-			localStorage.setItem("carro", JSON.stringify(carroArray));
-			console.log("2-agrego el producto del carro");
+      //buscarElemento recibe el carrito, y un id. Si encuentra el id adentro del carrito te devuelve true, si no false
+      function buscarElemento(carroArray, id){
+        for(let index = 0;index < JSON.parse(localStorage.getItem("carro")).length; index++){
+          if(id==carroArray[index].id){
+          return true ;
+		      }
+	    	}
+        return false;
+      }
+
+      function esElUltimo(carroArray){
+        if(carroArray.length==0){
+          return true;
         }
+        else{
+          return false;
+        }
+      }
+
+      function eliminarElemento(carroArray, id){
+        for(let index = 0;index < JSON.parse(localStorage.getItem("carro")).length; index++){
+          if(id==carroArray[index].id){
+            carroArray.splice(index, 1);
+            localStorage.setItem("carro", JSON.stringify(carroArray));
+            //Verificamos si el elemento eliminado es el último del carro
+            if(esElUltimo(carroArray)){
+              localStorage.clear("carro");
+            };
+          return true ;
+		      }
+	    	}
+        return false;
+      }
+
+      function agregarAlCarrito(elemento){  
+		    var carroArray = [];
+        if (localStorage.getItem("carro")) {
+           carroArray=JSON.parse(localStorage.getItem("carro"));
+        	//Primero reviso si el elemento que intentamos agregar 
+        	//ya está en el array del localStorage(para eso empiezo recorriendo el array)
+        	for(let index = 0;index < JSON.parse(localStorage.getItem("carro")).length; index++){
+        		//buscarElemento si lo encuentra te da true sino false     
+          		if(buscarElemento(carroArray, elemento.id)){
+            		//Si está en el array lo elimino
+					        console.log("Lo encontrṕ");
+					        console.log(eliminarElemento(carroArray, elemento.id));
+                	break;
+          		}
+          		//Si no está en el array
+          		else{
+            carroArray.push(elemento);
+				    localStorage.setItem("carro", JSON.stringify(carroArray));
+			    	break;
+          		}
+        	}
+       
+		    } else{
+			    carroArray.push(elemento);
+          localStorage.setItem("carro", JSON.stringify(carroArray));
+		        }
 		listarProductos();
       }
     </script>
