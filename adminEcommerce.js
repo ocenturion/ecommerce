@@ -82,8 +82,13 @@ function mostrarTabla(abm){
                                                         <th>Nombre</th>
                                                         <th>Eliminado</th>
         `;
-    }else {
-        document.getElementById('tituloDelAbm').innerHTML="Mis datos";
+    }else if(abm==="misDatos"){
+         document.getElementById('tituloMisDatos').innerHTML="Mis datos";
+        document.getElementById('moduloDerecho').style.display="none";
+        document.getElementById('moduloDerecho').style.visibility="hidden";
+        document.getElementById('btnAgregar').style.visibility="hidden";
+        document.getElementById('btnAgregar').style.height="1px";
+        document.getElementById('moduloDatos').style.visibility="visible";
     }  
     
     let tipoDeConsulta = abm;
@@ -168,7 +173,7 @@ function mostrarTabla(abm){
                     <td><button type="button" onclick="onclick_btnEliminar('proveedor','${element.id}')" class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar</button></td>
                 </tr>
                 `;
-            });
+                });
             }
             document.getElementById('tableBody').innerHTML=llenarTabla;
         }

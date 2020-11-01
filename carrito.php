@@ -8,27 +8,14 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Carrito</title>
-    <style>
-        .container-fluid {
-            padding: 0;
-        }
-
-        .row {
-            margin: 0;
-        }
-
-        .col-7 {
-            padding: 0;
-        }
-    </style>
 </head>
 
 <body>
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-lg-7">
-            <div id="alerta"></div>
+            <div class="col-12 col-lg-8">
+                <div id="alerta"></div>
                 <table class="table table-dark">
                     <thead>
                         <tr>
@@ -48,7 +35,7 @@
                     </tfoot>
                 </table>
             </div>
-            <div class="col-12 col-lg-5">
+            <div class="col-12 col-lg-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Medios de pago</h5>
@@ -93,8 +80,8 @@
     </div>
     <?php include("carrito-modal.php")?>
 </body>
-
-</html>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script></html>
 <script>
     function verificarTablaVacia(carroArray) {
         if (carroArray == null) {
