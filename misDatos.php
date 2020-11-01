@@ -27,7 +27,7 @@
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Rubro</span>
-                </div>
+                </div> 
                 <input id="rubro"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
             </div>
             <div class="custom-file mb-3">
