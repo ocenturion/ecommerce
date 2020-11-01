@@ -84,7 +84,7 @@ function mostrarTabla(abm){
         `;
     }else if(abm==="misDatos"){
          document.getElementById('tituloMisDatos').innerHTML="Mis datos";
-        document.getElementById('moduloDerecho').style.display="none";
+        document.getElementById('moduloDerecho').style.display="none"; 
         document.getElementById('moduloDerecho').style.visibility="hidden";
         document.getElementById('btnAgregar').style.visibility="hidden";
         document.getElementById('btnAgregar').style.height="1px";
