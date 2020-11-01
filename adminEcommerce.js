@@ -28,7 +28,7 @@ function mostrarTabla(abm){
 
     document.getElementById('btnAgregar').style.visibility="visible";
     if (abm==="abmProductos") {
-        document.getElementById('moduloDerecho').style.visibility="visible";
+        tablaAbmVisible();
         document.getElementById('moduloDatos').style.visibility="hidden";
         document.getElementById('tituloDelAbm').innerHTML="ABM Productos";
         document.getElementById('tituloAgregar').innerHTML="Agregar Productos";
@@ -49,6 +49,7 @@ function mostrarTabla(abm){
                                                         <th>Eliminado</th>
         `;
     }else if (abm==="abmCategorías"){
+        tablaAbmVisible();
         document.getElementById('tituloDelAbm').innerHTML="ABM Categorías";
         document.getElementById('btnAgregar').innerHTML=`
         <button type="button" onclick="onclick_btnAgregar('categoria')" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalAgregar">
@@ -62,6 +63,7 @@ function mostrarTabla(abm){
                                                         <th>Eliminado</th>
         `;
     }else if (abm==="abmProveedores"){
+        tablaAbmVisible();
         document.getElementById('tituloDelAbm').innerHTML="ABM Proveedores";
        document.getElementById('btnAgregar').innerHTML=`
         <button type="button" onclick="onclick_btnAgregar('proveedor')" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalAgregar">
@@ -83,12 +85,7 @@ function mostrarTabla(abm){
                                                         <th>Eliminado</th>
         `;
     }else if(abm==="misDatos"){
-         document.getElementById('tituloMisDatos').innerHTML="Mis datos";
-        document.getElementById('moduloDerecho').style.display="none"; 
-        document.getElementById('moduloDerecho').style.visibility="hidden";
-        document.getElementById('btnAgregar').style.visibility="hidden";
-        document.getElementById('btnAgregar').style.height="1px";
-        document.getElementById('moduloDatos').style.visibility="visible";
+        misDatosVisible();
     }  
     
     let tipoDeConsulta = abm;
@@ -174,6 +171,13 @@ function mostrarTabla(abm){
                 </tr>
                 `;
                 });
+            }else if(tipoDeConsulta=='misDatos'){
+                respuesta2.forEach(element => {
+                    document.getElementById('nombreEmpresa').value=`${element.nombreEmpresa}`;
+                    document.getElementById('direccion').value=`${element.direccion}`;
+                    document.getElementById('cuit').value=`${element.cuit}`;
+                    document.getElementById('rubro').value=`${element.rubro}`;
+                })
             }
             document.getElementById('tableBody').innerHTML=llenarTabla;
         }
@@ -186,6 +190,18 @@ function llenarVistaPrevia(idALlenar,idDelContenido){
     }
 }
 
-function cargarMisDatos(){
-    document.getElementById('tituloMisDatos').innerHTML="Mis datos"; 
+function misDatosVisible(){
+    document.getElementById('tituloMisDatos').innerHTML="Mis datos";
+    document.getElementById('moduloDerecho').style.display="none"; 
+    document.getElementById('moduloDerecho').style.visibility="hidden";
+    document.getElementById('btnAgregar').style.visibility="hidden";
+    document.getElementById('moduloDatos').style.display="block"; 
+    document.getElementById('moduloDatos').style.visibility="visible"; 
+}
+function tablaAbmVisible(){
+    document.getElementById('btnAgregar').style.visibility="visible";
+    document.getElementById('moduloDerecho').style.visibility="visible";
+    document.getElementById('moduloDerecho').style.display="block"; 
+    document.getElementById('moduloDatos').style.display="none"; 
+    document.getElementById('moduloDatos').style.visibility="hidden"; 
 }

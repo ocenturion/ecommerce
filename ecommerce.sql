@@ -1,13 +1,14 @@
--- phpMyAdmin SQL Dump 
--- version 5.0.2
+-- phpMyAdmin SQL Dump
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-10-2020 a las 01:33:03
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.6
+-- Tiempo de generación: 02-11-2020 a las 00:05:00
+-- Versión del servidor: 10.1.34-MariaDB
+-- Versión de PHP: 7.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -40,6 +41,27 @@ CREATE TABLE `categoria` (
 INSERT INTO `categoria` (`id_categoria`, `nombre`, `eliminado`) VALUES
 (1, 'Verduras', 0),
 (3, 'Frutas', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `misdatos`
+--
+
+CREATE TABLE `misdatos` (
+  `id` int(11) NOT NULL,
+  `nombreEmpresa` varchar(100) NOT NULL,
+  `direccion` varchar(255) NOT NULL,
+  `cuit` varchar(15) NOT NULL,
+  `rubro` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `misdatos`
+--
+
+INSERT INTO `misdatos` (`id`, `nombreEmpresa`, `direccion`, `cuit`, `rubro`) VALUES
+(1, 'Los Bolis', 'av. siempre viva 123', '20-35353535-7', 'Verduleria');
 
 -- --------------------------------------------------------
 
@@ -140,6 +162,12 @@ ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
+-- Indices de la tabla `misdatos`
+--
+ALTER TABLE `misdatos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
@@ -175,6 +203,12 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `categoria`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `misdatos`
+--
+ALTER TABLE `misdatos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`

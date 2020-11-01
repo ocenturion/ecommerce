@@ -23,7 +23,8 @@
     }elseif ($tipoDeConsulta=='Reportes') {
         //$query="";
     }else{
-        //$query="";
+        // $tipoDeConsulta=misDatos
+        $query="select * from misDatos";
     }
     $ejecutar=mysqli_query($conexion,$query);
 
@@ -55,7 +56,13 @@
          }elseif ($tipoDeConsulta=='Reportes') {
             
          }else{
-             
+            $jsondata[]=array(
+                "id"=>$reg["id"],
+                "nombreEmpresa"=>$reg["nombreEmpresa"],
+                "direccion"=>$reg["direccion"],
+                "cuit"=>$reg["cuit"],
+                "rubro"=>$reg["rubro"],
+            );
          }
         
     }
