@@ -35,7 +35,11 @@
                 <label class="custom-file-label" for="validatedCustomFile">Logo de la empresa</label>
             </div>
 
-            <button class="btn btn-primary">Guardar cambios</button>
+            <button class="btn btn-primary" onclick="editarCambios('misdatos')">Guardar cambios</button>
         </div>
     </div>
 </div>
+<!-- 
+tutorial para subir imagen con php y mysql
+http://www.formacionwebonline.com/guia-para-subir-y-visualizar-imagenes-con-php-y-mysql/
+ -->

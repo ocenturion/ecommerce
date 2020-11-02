@@ -177,6 +177,13 @@ function editarCambios(tipoABM){
         let cuitProveedor=document.getElementById('editarCuit').value;
         data = {"tipoABM": tipoABM, "id":idProveedor,"nombre":nombreProveedor,"direccion":direccionProveedor,"cuit":cuitProveedor};
         
+    }else if (tipoABM=="misdatos") {
+        let nombreEmpresa=document.getElementById('nombreEmpresa').value;
+        let direccion=document.getElementById('nombreEmpresa').value;
+        let cuit=document.getElementById('nombreEmpresa').value;
+        let rubro=document.getElementById('nombreEmpresa').value;
+        let logo=document.getElementById('nombreEmpresa').value;
+        data = {"tipoABM": tipoABM, "id":1,"nombreEmpresa":nombreEmpresa,"direccion":direccion,"cuit":cuit,"logo":logo};
     }
     console.log(data);
     $.ajax({
