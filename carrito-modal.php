@@ -39,8 +39,16 @@
                     </tfoot>
                 </table>
             </div>
+            <div>
+              <h6>Método de pago:</h6>
+              <h6>Fecha: <span id="fecha"></span>, Hora: <span id="hora"></span></h6>
+            </div>
           </div>
         </div>
+    </div>
+    <div>
+      <hr> 
+      <h2 class="modal-title" id="gratulaTicket" align="center">Gracias por su compra</h2><br>
     </div>
       <!-- Footer del Ticket(Botones de cierre del modal) -->
       <div class="modal-footer">
@@ -100,5 +108,13 @@
       
     };
 
+    function llenarFechaDeCompra(){
+      var dt = new Date();
+      document.getElementById("fecha").innerHTML = dt.toLocaleDateString();
+      document.getElementById("hora").innerHTML = dt.toLocaleTimeString();
+    };
+
     llenarTablaTicket();
+    llenarFechaDeCompra();
+
 </script>

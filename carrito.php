@@ -71,7 +71,8 @@
                         </div>
                         <div>
                             <button class="btn btn-secondary">Cancelar</button>
-                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">Finalizar compra</button>
+                            <!-- <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">Finalizar compra</button> -->
+                            <button type="submit" class="btn btn-primary my-1" data-toggle="modal" data-target="#exampleModal">Finalizar compra</button>
                         </div>
                     </div>
                 </div>
@@ -119,5 +120,11 @@
             document.getElementById("precioTotal").innerHTML = '$ ' + total;
         }
     };
+
+    function metodoDePagoSeleccionado(){
+        
+    }
+
+    metodoDePagoSeleccionado();
     llenarTabla();
 </script>
